@@ -955,4 +955,269 @@ body::after {
         transform: translate(0, 0) rotate(360deg) scale(1);
     }
 }
+
+/* Responsive Design Updates */
+@media (max-width: 1200px) {
+    .hero {
+        padding: 0 20px;
+    }
+
+    .contact-container {
+        flex-direction: column;
+        padding: 20px;
+    }
+
+    .contact-card,
+    .form-card {
+        width: 100%;
+    }
+}
+
+@media (max-width: 768px) {
+    /* Navigation */
+    nav {
+        padding: 15px;
+    }
+
+    nav ul {
+        display: none; /* You might want to add a mobile menu later */
+    }
+
+    /* Hero Section */
+    .hero {
+        flex-direction: column;
+        text-align: center;
+        gap: 30px;
+    }
+
+    .hero h1 {
+        font-size: 2.5rem;
+    }
+
+    .subtitle {
+        font-size: 1.2rem;
+    }
+
+    .hero-buttons {
+        justify-content: center;
+    }
+
+    .code-block {
+        transform: none;
+        max-width: 100%;
+        font-size: 12px;
+    }
+
+    /* Projects & Skills */
+    .project-grid,
+    .skills-container {
+        grid-template-columns: 1fr;
+        gap: 20px;
+    }
+
+    /* Contact Section */
+    .contact-stats {
+        flex-direction: column;
+        gap: 15px;
+    }
+
+    .stat-item {
+        width: 100%;
+    }
+
+    .contact-link {
+        padding: 12px;
+    }
+
+    /* Language Switch */
+    .language-switch {
+        top: 10px;
+        right: 10px;
+    }
+
+    .lang-btn {
+        padding: 6px 10px;
+        font-size: 0.9rem;
+    }
+}
+
+@media (max-width: 480px) {
+    /* Further adjustments for very small screens */
+    section {
+        padding: 60px 20px;
+    }
+
+    .hero h1 {
+        font-size: 2rem;
+    }
+
+    .subtitle {
+        font-size: 1rem;
+    }
+
+    .hero-buttons {
+        flex-direction: column;
+        gap: 15px;
+    }
+
+    .cta-button {
+        width: 100%;
+        text-align: center;
+    }
+
+    .contact-form {
+        padding: 20px;
+    }
+
+    .floating-label input,
+    .floating-label textarea {
+        padding: 12px;
+        font-size: 0.9rem;
+    }
+
+    /* Adjust dots for mobile */
+    .background-dots {
+        display: none; /* Optional: remove dots on mobile for better performance */
+    }
+}
+
+/* Fix for iOS Safari 100vh issue */
+@supports (-webkit-touch-callout: none) {
+    section {
+        min-height: -webkit-fill-available;
+    }
+}
+
+/* Extra Small Devices (onder 380px) */
+@media (max-width: 380px) {
+    /* Header & Text */
+    .hero h1 {
+        font-size: 1.75rem;
+    }
+
+    .subtitle {
+        font-size: 0.9rem;
+        line-height: 1.4;
+    }
+
+    h2 {
+        font-size: 1.5rem;
+    }
+
+    h3 {
+        font-size: 1.2rem;
+    }
+
+    /* Project Cards */
+    .project-card {
+        padding: 15px;
+        min-height: auto;
+    }
+
+    .project-card p {
+        font-size: 0.85rem;
+    }
+
+    /* Skills Section */
+    .skill {
+        padding: 12px;
+    }
+
+    .skill p {
+        font-size: 0.85rem;
+    }
+
+    /* Contact Section */
+    .contact-card {
+        padding: 15px;
+    }
+
+    .contact-header h3 {
+        font-size: 1.2rem;
+    }
+
+    .contact-subtitle {
+        font-size: 0.85rem;
+    }
+
+    .stat-number {
+        font-size: 1.5rem;
+    }
+
+    .stat-label {
+        font-size: 0.8rem;
+    }
+
+    .contact-links {
+        gap: 10px;
+    }
+
+    .contact-link {
+        padding: 8px;
+    }
+
+    .link-title {
+        font-size: 0.8rem;
+    }
+
+    .link-value {
+        font-size: 0.75rem;
+    }
+
+    /* Code Block */
+    .code-block {
+        padding: 12px;
+        font-size: 11px;
+        line-height: 1.4;
+    }
+
+    /* Language Switch */
+    .language-switch {
+        top: 5px;
+        right: 5px;
+    }
+
+    .lang-btn {
+        padding: 4px 8px;
+        font-size: 0.8rem;
+    }
+
+    /* Buttons */
+    .cta-button {
+        padding: 10px 15px;
+        font-size: 0.9rem;
+    }
+
+    /* Sections Spacing */
+    section {
+        padding: 40px 15px;
+    }
+
+    .section-header {
+        margin-bottom: 20px;
+    }
+}
+
+/* Fix voor zeer smalle devices (onder 320px) */
+@media (max-width: 320px) {
+    .hero h1 {
+        font-size: 1.5rem;
+    }
+
+    .subtitle {
+        font-size: 0.8rem;
+    }
+
+    .code-block {
+        font-size: 10px;
+    }
+
+    .contact-stats {
+        padding: 10px;
+    }
+
+    .stat-number {
+        font-size: 1.2rem;
+    }
+}
   
