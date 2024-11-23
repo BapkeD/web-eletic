@@ -14,6 +14,9 @@
     </div>
 
     <section id="home">
+        <div class="background-dots">
+            <!-- JavaScript zal de dots genereren -->
+        </div>
         <div class="hero" data-aos="fade-up">
             <div class="hero-content">
                 <h1><span data-translate="welcome">Welcome to</span> <span class="gradient-text">Electic</span></h1>
@@ -210,6 +213,38 @@ class Developer {
 
             typeNextCharacter();
         });
+
+        // Genereer en beweeg de dots
+        const backgroundDots = document.querySelector('.background-dots');
+        const numberOfDots = 50;
+
+        function createDot() {
+            const dot = document.createElement('div');
+            dot.className = 'dot';
+            setRandomPosition(dot);
+            backgroundDots.appendChild(dot);
+            moveDot(dot);
+        }
+
+        function setRandomPosition(dot) {
+            dot.style.left = `${Math.random() * 100}%`;
+            dot.style.top = `${Math.random() * 100}%`;
+        }
+
+        function moveDot(dot) {
+            setInterval(() => {
+                const newX = Math.random() * 100;
+                const newY = Math.random() * 100;
+                
+                dot.style.left = `${newX}%`;
+                dot.style.top = `${newY}%`;
+            }, 30000 + (Math.random() * 20000)); // Interval tussen 30-50 seconden
+        }
+
+        // Creëer initiële dots
+        for (let i = 0; i < numberOfDots; i++) {
+            createDot();
+        }
     </script>
 </body>
 </html> 
