@@ -472,9 +472,10 @@ textarea::placeholder {
     color: var(--text-color);
     text-decoration: none;
     padding: 12px;
-    background: rgba(114, 137, 218, 0.1);
+    background: rgba(40, 40, 40, 0.3);
     border-radius: 8px;
     transition: all 0.3s ease;
+    border: 1px solid rgba(255, 255, 255, 0.1);
 }
 
 .contact-link:hover {
@@ -563,26 +564,18 @@ textarea::placeholder {
 
 .contact-card {
     flex: 1;
-    background: rgba(30, 30, 30, 0.7);
+    background: #121212;
     border-radius: 20px;
     padding: 40px;
     position: relative;
     overflow: hidden;
     backdrop-filter: blur(10px);
-    border: 1px solid rgba(114, 137, 218, 0.1);
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+    border: none;
+    box-shadow: none;
 }
 
 .card-glow {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: var(--gradient);
-    opacity: 0.1;
-    filter: blur(50px);
-    pointer-events: none;
+    display: none;
 }
 
 .contact-header {
@@ -650,16 +643,16 @@ textarea::placeholder {
     align-items: center;
     gap: 15px;
     padding: 15px;
-    background: rgba(114, 137, 218, 0.1);
+    background: #121212;
     border-radius: 12px;
     text-decoration: none;
     color: var(--text-color);
     transition: all 0.3s ease;
+    border: none;
 }
 
 .contact-link:hover {
-    background: var(--gradient);
-    transform: translateX(5px);
+    background: #121212;
 }
 
 .contact-link i {
@@ -777,5 +770,161 @@ textarea::placeholder {
 .floating-label input:focus + label + .input-highlight,
 .floating-label textarea:focus + label + .input-highlight {
     transform: scaleX(1);
+}
+
+/* Match exact met de website achtergrond */
+.contact-card,
+.contact-link,
+.stats-block,
+.form-card,
+.card-glow {
+    background: #1A1A1A !important;  /* Match met de site achtergrond */
+    background-image: none !important;
+    border: none;
+    box-shadow: none;
+}
+
+/* Verwijder alle hover effecten */
+.contact-card:hover,
+.contact-link:hover {
+    background: #1A1A1A !important;
+}
+
+/* Hoofdkader volledig transparant maken */
+.contact-card,
+.form-card,
+.card-glow {
+    background: #1A1A1A !important;
+    background-image: none !important;
+    border: none;
+    box-shadow: none;
+}
+
+/* Contact link items styling behouden */
+.contact-link {
+    background: rgba(30, 30, 30, 0.6);  /* Subtiel donkerder dan achtergrond */
+    border: 1px solid rgba(255, 255, 255, 0.05);  /* Heel subtiele border */
+    border-radius: 12px;
+    padding: 15px;
+    margin: 10px 0;
+    transition: background 0.3s ease;
+}
+
+/* Hover effect voor de links */
+.contact-link:hover {
+    background: rgba(40, 40, 40, 0.8);
+    transform: translateY(-2px);
+}
+
+/* Stats blokken (100+ en 24/7) ook subtiel zichtbaar houden */
+.stats-block,
+[class*="stats-"] {
+    background: rgba(30, 30, 30, 0.6) !important;  /* Zelfde als contact links */
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    border-radius: 12px;
+    padding: 20px;
+    margin: 10px 0;
+}
+
+/* Verwijder eventuele gradiënten */
+.stats-block,
+[class*="stats-"] {
+    background-image: none !important;
+    box-shadow: none !important;
+}
+
+/* Als er specifieke classes zijn voor deze blokken */
+.projects-completed,
+.support-block,
+.stats-container > div {
+    background: rgba(30, 30, 30, 0.6) !important;
+    background-image: none !important;
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    border-radius: 12px;
+}
+
+/* Uniforme styling voor alle blokken */
+.contact-link,
+.stats-block,
+.projects-completed,
+.support-block,
+[class*="stats-"] {
+    background: rgba(30, 30, 30, 0.6) !important;  /* Zelfde achtergrond voor alles */
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    border-radius: 12px;
+    padding: 20px;
+    margin: 10px 0;
+    background-image: none !important;
+    box-shadow: none !important;
+}
+
+/* Verwijder eventuele gradiënten of andere effecten */
+.card-glow,
+.gradient-bg,
+.gradient-overlay {
+    display: none !important;
+}
+
+/* Uniforme styling voor alle stats blokken */
+.stats-block,
+.projects-block,
+[class*="stats-"],
+.contact-stats > div {    /* Dit pakt alle stats containers */
+    background: rgba(30, 30, 30, 0.6) !important;  /* Zelfde als contact links */
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    border-radius: 12px;
+    padding: 20px;
+    margin: 10px 0;
+    background-image: none !important;
+    box-shadow: none !important;
+}
+
+/* Specifiek voor de getallen en tekst */
+.stats-number,
+.stats-text {
+    color: #fff;  /* Witte tekst */
+}
+
+/* Als er een specifieke class is voor de 100+ block */
+.projects-completed,
+.completion-stats {
+    background: rgba(30, 30, 30, 0.6) !important;
+    border: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+/* Particles container aanpassen */
+#particles-js {
+    position: fixed;  /* In plaats van absolute */
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+    z-index: 0;
+}
+
+/* Zorg dat de content over de particles komt */
+.container,
+section,
+.content-wrapper {
+    position: relative;
+    z-index: 1;
+}
+
+/* Gradient overlay */
+body::after {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+    background: linear-gradient(
+        180deg,
+        rgba(18, 18, 18, 0.7) 0%,
+        rgba(18, 18, 18, 0.85) 50%,
+        rgba(18, 18, 18, 0.95) 100%
+    );
+    z-index: 0;
+    pointer-events: none;
 }
   
