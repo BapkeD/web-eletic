@@ -8,24 +8,19 @@
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
 </head>
 <body>
-    <nav>
-        <div class="logo">Electic</div>
-        <ul>
-            <li><a href="#home">Home</a></li>
-            <li><a href="#projecten">Projecten</a></li>
-            <li><a href="#skills">Skills</a></li>
-            <li><a href="#contact">Contact</a></li>
-        </ul>
-    </nav>
+    <div class="language-switch">
+        <button class="lang-btn active" data-lang="en">EN</button>
+        <button class="lang-btn" data-lang="nl">NL</button>
+    </div>
 
     <section id="home">
         <div class="hero" data-aos="fade-up">
             <div class="hero-content">
-                <h1>Welkom bij <span class="gradient-text">Electic</span></h1>
-                <p class="subtitle">Specialist in Web, Discord & FiveM Development</p>
+                <h1><span data-translate="welcome">Welcome to</span> <span class="gradient-text">Electic</span></h1>
+                <p class="subtitle" data-translate="subtitle">Specialist in Web, Discord & FiveM Development</p>
                 <div class="hero-buttons">
-                    <a href="#projecten" class="cta-button">Bekijk Projecten</a>
-                    <a href="#contact" class="cta-button secondary">Neem Contact Op</a>
+                    <a href="#projecten" class="cta-button" data-translate="viewProjects">View Projects</a>
+                    <a href="#contact" class="cta-button secondary" data-translate="contact">Contact Me</a>
                 </div>
             </div>
             <div class="code-block">
@@ -46,49 +41,49 @@
     </section>
 
     <section id="projecten">
-        <h2 data-aos="fade-right">Mijn Projecten</h2>
+        <h2 data-aos="fade-right" data-translate="projects">Projects</h2>
         <div class="project-grid">
             <div class="project-card" data-aos="zoom-in">
-                <h3>Web Development</h3>
-                <p>Custom websites en webapplicaties</p>
+                <h3 data-translate="webDev">Web Development</h3>
+                <p data-translate="webDevDesc">Custom websites and web applications</p>
             </div>
             <div class="project-card" data-aos="zoom-in">
-                <h3>Discord Bots</h3>
-                <p>Geavanceerde Discord bots op maat</p>
+                <h3 data-translate="discordBots">Discord Bots</h3>
+                <p data-translate="discordBotsDesc">Advanced custom Discord bots</p>
             </div>
             <div class="project-card" data-aos="zoom-in">
-                <h3>FiveM Scripts</h3>
-                <p>Custom scripts en systemen voor FiveM servers</p>
+                <h3 data-translate="fivemScripts">FiveM Scripts</h3>
+                <p data-translate="fivemScriptsDesc">Custom scripts and systems for FiveM servers</p>
             </div>
         </div>
     </section>
 
     <section id="skills">
-        <h2 data-aos="fade-right">Vaardigheden</h2>
+        <h2 data-aos="fade-right" data-translate="skills">Skills</h2>
         <div class="skills-container">
             <div class="skill" data-aos="fade-up">
                 <h3>Frontend</h3>
-                <p>HTML, CSS, JavaScript, React</p>
+                <p data-translate="frontendSkills">HTML, CSS, JavaScript, React</p>
             </div>
             <div class="skill" data-aos="fade-up">
                 <h3>Backend</h3>
-                <p>Node.js, Python, PHP</p>
+                <p data-translate="backendSkills">Node.js, Python, PHP</p>
             </div>
             <div class="skill" data-aos="fade-up">
                 <h3>Database</h3>
-                <p>MySQL, MongoDB</p>
+                <p data-translate="databaseSkills">MySQL, MongoDB</p>
             </div>
         </div>
     </section>
 
     <section id="contact">
-        <h2 data-aos="fade-right">Contact</h2>
+        <h2 data-aos="fade-right" data-translate="contact">Contact</h2>
         <div class="contact-form" data-aos="fade-up">
             <form>
-                <input type="text" placeholder="Naam">
-                <input type="email" placeholder="Email">
-                <textarea placeholder="Bericht"></textarea>
-                <button type="submit">Verstuur</button>
+                <input type="text" data-translate-placeholder="name" placeholder="Name">
+                <input type="email" data-translate-placeholder="email" placeholder="Email">
+                <textarea data-translate-placeholder="message" placeholder="Message"></textarea>
+                <button type="submit" data-translate="send">Send</button>
             </form>
         </div>
     </section>
@@ -98,6 +93,74 @@
         AOS.init({
             duration: 1000,
             once: true
+        });
+
+        document.addEventListener('DOMContentLoaded', function() {
+            const langButtons = document.querySelectorAll('.lang-btn');
+            const textElements = {
+                en: {
+                    welcome: "Welcome to",
+                    subtitle: "Specialist in Web, Discord & FiveM Development",
+                    viewProjects: "View Projects",
+                    contact: "Contact Me",
+                    projects: "Projects",
+                    webDev: "Web Development",
+                    webDevDesc: "Custom websites and web applications",
+                    discordBots: "Discord Bots",
+                    discordBotsDesc: "Advanced custom Discord bots",
+                    fivemScripts: "FiveM Scripts",
+                    fivemScriptsDesc: "Custom scripts and systems for FiveM servers",
+                    skills: "Skills",
+                    frontendSkills: "HTML, CSS, JavaScript, React",
+                    backendSkills: "Node.js, Python, PHP",
+                    databaseSkills: "MySQL, MongoDB",
+                    name: "Name",
+                    email: "Email",
+                    message: "Message",
+                    send: "Send"
+                },
+                nl: {
+                    welcome: "Welkom bij",
+                    subtitle: "Specialist in Web, Discord & FiveM Development",
+                    viewProjects: "Bekijk Projecten",
+                    contact: "Neem Contact Op",
+                    projects: "Projecten",
+                    webDev: "Web Development",
+                    webDevDesc: "Custom websites en webapplicaties",
+                    discordBots: "Discord Bots",
+                    discordBotsDesc: "Geavanceerde Discord bots op maat",
+                    fivemScripts: "FiveM Scripts",
+                    fivemScriptsDesc: "Custom scripts en systemen voor FiveM servers",
+                    skills: "Vaardigheden",
+                    frontendSkills: "HTML, CSS, JavaScript, React",
+                    backendSkills: "Node.js, Python, PHP",
+                    databaseSkills: "MySQL, MongoDB",
+                    name: "Naam",
+                    email: "Email",
+                    message: "Bericht",
+                    send: "Versturen"
+                }
+            };
+
+            langButtons.forEach(btn => {
+                btn.addEventListener('click', function() {
+                    const lang = this.dataset.lang;
+                    
+                    // Update active state van buttons
+                    langButtons.forEach(b => b.classList.remove('active'));
+                    this.classList.add('active');
+                    
+                    // Update teksten met smooth transitie
+                    document.querySelectorAll('[data-translate]').forEach(element => {
+                        const key = element.dataset.translate;
+                        element.style.opacity = '0';
+                        setTimeout(() => {
+                            element.textContent = textElements[lang][key];
+                            element.style.opacity = '1';
+                        }, 300);
+                    });
+                });
+            });
         });
     </script>
 </body>
