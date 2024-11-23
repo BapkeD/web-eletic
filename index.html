@@ -161,6 +161,54 @@
                     });
                 });
             });
+
+            // Nieuwe typing implementatie
+            const codeBlock = document.querySelector('.code-block');
+            const codeText = `// Initialiseer Developer
+class Developer {
+    name: "Electic",
+    specialties: [
+        "Web Development",
+        "Discord Bots",
+        "FiveM Scripts"
+    ],
+    status: "Available for projects",
+    passion: "Creating amazing digital experiences"
+}
+// Let's build something awesome together!`;
+
+            codeBlock.innerHTML = '';
+            let currentText = '';
+            let currentIndex = 0;
+
+            const cursor = document.createElement('span');
+            cursor.className = 'typing-cursor';
+
+            function typeNextCharacter() {
+                if (currentIndex < codeText.length) {
+                    const char = codeText[currentIndex];
+                    currentText += char;
+                    codeBlock.innerHTML = formatCode(currentText);
+                    codeBlock.appendChild(cursor);
+                    currentIndex++;
+                    
+                    // Snellere typing met kleine random variatie
+                    const randomDelay = Math.floor(Math.random() * (40 - 20 + 1)) + 20;
+                    setTimeout(typeNextCharacter, randomDelay);
+                } else {
+                    codeBlock.classList.add('typing-complete');
+                }
+            }
+
+            function formatCode(text) {
+                return text
+                    .replace(/class/g, '<span class="code-keyword">class</span>')
+                    .replace(/Developer/g, '<span class="code-function">Developer</span>')
+                    .replace(/"[^"]+"/g, match => `<span class="code-string">${match}</span>`)
+                    .replace(/\/\/ .*$/gm, match => `<span class="code-comment">${match}</span>`);
+            }
+
+            typeNextCharacter();
         });
     </script>
 </body>
