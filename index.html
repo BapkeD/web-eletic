@@ -6,8 +6,10 @@
     <title>Electic Developer Portfolio</title>
     <link rel="stylesheet" href="style.css">
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 </head>
 <body>
+    <div id="particles-js"></div>
     <div class="language-switch">
         <button class="lang-btn active" data-lang="en">EN</button>
         <button class="lang-btn" data-lang="nl">NL</button>
@@ -133,54 +135,7 @@
                 </div>
             </div>
 
-            <div class="contact-card form-card">
-                <div class="card-glow"></div>
-                <form>
-                    <div class="form-header">
-                        <div class="step-indicator">
-                            <div class="step active">1</div>
-                            <div class="step-line"></div>
-                            <div class="step">2</div>
-                            <div class="step-line"></div>
-                            <div class="step">3</div>
-                        </div>
-                    </div>
-
-                    <div class="form-group floating-label">
-                        <input type="text" id="name" required>
-                        <label for="name" data-translate="name">Name</label>
-                        <div class="input-highlight"></div>
-                    </div>
-
-                    <div class="form-group floating-label">
-                        <input type="email" id="email" required>
-                        <label for="email" data-translate="email">Email</label>
-                        <div class="input-highlight"></div>
-                    </div>
-
-                    <div class="form-group">
-                        <select id="subject" required>
-                            <option value="" disabled selected data-translate="selectSubject">Select Subject</option>
-                            <option value="web">Web Development</option>
-                            <option value="discord">Discord Bot</option>
-                            <option value="fivem">FiveM Script</option>
-                            <option value="other">Other</option>
-                        </select>
-                        <div class="select-arrow"></div>
-                    </div>
-
-                    <div class="form-group floating-label">
-                        <textarea id="message" required></textarea>
-                        <label for="message" data-translate="message">Message</label>
-                        <div class="input-highlight"></div>
-                    </div>
-
-                    <button type="submit" class="submit-btn">
-                        <span data-translate="send">Send Message</span>
-                        <i class="fas fa-paper-plane"></i>
-                    </button>
-                </form>
-            </div>
+            
         </div>
     </section>
 
@@ -309,29 +264,31 @@ class Developer {
 
         // Genereer en beweeg de dots
         const backgroundDots = document.querySelector('.background-dots');
-        const numberOfDots = 50;
+        const numberOfDots = 100;
 
         function createDot() {
             const dot = document.createElement('div');
             dot.className = 'dot';
-            setRandomPosition(dot);
-            backgroundDots.appendChild(dot);
-            moveDot(dot);
-        }
-
-        function setRandomPosition(dot) {
+            
+            // Random startpositie
             dot.style.left = `${Math.random() * 100}%`;
             dot.style.top = `${Math.random() * 100}%`;
-        }
-
-        function moveDot(dot) {
-            setInterval(() => {
-                const newX = Math.random() * 100;
-                const newY = Math.random() * 100;
-                
-                dot.style.left = `${newX}%`;
-                dot.style.top = `${newY}%`;
-            }, 30000 + (Math.random() * 20000)); // Interval tussen 30-50 seconden
+            
+            // Kleinere bollen (2-6px)
+            const size = 2 + Math.random() * 4;
+            dot.style.width = `${size}px`;
+            dot.style.height = `${size}px`;
+            
+            // Iets lagere opacity
+            dot.style.opacity = 0.1 + Math.random() * 0.2;
+            
+            // Veel variatie in animatie vertraging
+            dot.style.animationDelay = `${-Math.random() * 50}s`;
+            
+            // Random animatie duur (30-60 seconden)
+            dot.style.animationDuration = `${30 + Math.random() * 30}s`;
+            
+            backgroundDots.appendChild(dot);
         }
 
         // Creëer initiële dots
