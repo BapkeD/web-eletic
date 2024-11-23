@@ -14,9 +14,9 @@
 
 body {
     font-family: 'Arial', sans-serif;
-    background-color: var(--primary-color);
+    background-color: #000000;
     color: var(--text-color);
-    background: linear-gradient(to bottom right, #0f0f0f, #1a1a1a, #2d2d2d);
+    
     min-height: 100vh;
 }
 
@@ -60,6 +60,8 @@ section {
     display: flex;
     flex-direction: column;
     justify-content: center;
+    position: relative;
+    z-index: 1;
 }
 
 .hero {
@@ -396,23 +398,25 @@ textarea::placeholder {
 
 /* Voeg deze nieuwe class toe voor de bolletjes */
 .background-dots {
-    position: absolute;
+    position: fixed;
     top: 0;
     left: 0;
     width: 100%;
-    height: 100%;
-    z-index: -1;
+    height: 100vh;
+    z-index: 0;
     overflow: hidden;
+    pointer-events: none;
 }
 
 .dot {
-    position: absolute;
+    position: fixed;
     width: 4px;
     height: 4px;
     background-color: var(--accent-color);
     border-radius: 50%;
     opacity: 0.2;
-    transition: all 30s ease-in-out;
+    pointer-events: none;
+    animation: float 30s infinite linear;
 }
 
 .dot::after {
@@ -926,5 +930,29 @@ body::after {
     );
     z-index: 0;
     pointer-events: none;
+}
+
+/* Voeg deze style toe om ervoor te zorgen dat de content container over de dots komt */
+#content-wrapper {
+    position: relative;
+    z-index: 1;
+}
+
+@keyframes float {
+    0% {
+        transform: translate(0, 0) rotate(0deg) scale(1);
+    }
+    25% {
+        transform: translate(100px, 100px) rotate(90deg) scale(1.5);
+    }
+    50% {
+        transform: translate(0, 200px) rotate(180deg) scale(1);
+    }
+    75% {
+        transform: translate(-100px, 100px) rotate(270deg) scale(1.5);
+    }
+    100% {
+        transform: translate(0, 0) rotate(360deg) scale(1);
+    }
 }
   

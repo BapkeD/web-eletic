@@ -264,29 +264,31 @@ class Developer {
 
         // Genereer en beweeg de dots
         const backgroundDots = document.querySelector('.background-dots');
-        const numberOfDots = 50;
+        const numberOfDots = 100;
 
         function createDot() {
             const dot = document.createElement('div');
             dot.className = 'dot';
-            setRandomPosition(dot);
-            backgroundDots.appendChild(dot);
-            moveDot(dot);
-        }
-
-        function setRandomPosition(dot) {
+            
+            // Random startpositie
             dot.style.left = `${Math.random() * 100}%`;
             dot.style.top = `${Math.random() * 100}%`;
-        }
-
-        function moveDot(dot) {
-            setInterval(() => {
-                const newX = Math.random() * 100;
-                const newY = Math.random() * 100;
-                
-                dot.style.left = `${newX}%`;
-                dot.style.top = `${newY}%`;
-            }, 30000 + (Math.random() * 20000)); // Interval tussen 30-50 seconden
+            
+            // Kleinere bollen (2-6px)
+            const size = 2 + Math.random() * 4;
+            dot.style.width = `${size}px`;
+            dot.style.height = `${size}px`;
+            
+            // Iets lagere opacity
+            dot.style.opacity = 0.1 + Math.random() * 0.2;
+            
+            // Veel variatie in animatie vertraging
+            dot.style.animationDelay = `${-Math.random() * 50}s`;
+            
+            // Random animatie duur (30-60 seconden)
+            dot.style.animationDuration = `${30 + Math.random() * 30}s`;
+            
+            backgroundDots.appendChild(dot);
         }
 
         // Creëer initiële dots
