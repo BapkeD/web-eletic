@@ -80,14 +80,107 @@
     </section>
 
     <section id="contact">
-        <h2 data-aos="fade-right" data-translate="contact">Contact</h2>
-        <div class="contact-form" data-aos="fade-up">
-            <form>
-                <input type="text" data-translate-placeholder="name" placeholder="Name">
-                <input type="email" data-translate-placeholder="email" placeholder="Email">
-                <textarea data-translate-placeholder="message" placeholder="Message"></textarea>
-                <button type="submit" data-translate="send">Send</button>
-            </form>
+        <div class="section-header" data-aos="fade-up">
+            <h2 data-translate="contact">Contact</h2>
+            <div class="header-line"></div>
+        </div>
+        
+        <div class="contact-container" data-aos="fade-up">
+            <div class="contact-card info-card">
+                <div class="card-glow"></div>
+                <div class="contact-header">
+                    <div class="contact-icon">
+                        <i class="fas fa-comments"></i>
+                    </div>
+                    <h3 data-translate="contactTitle">Let's Work Together</h3>
+                </div>
+                
+                <p class="contact-subtitle" data-translate="contactDesc">Ready to start your next project? Send me a message and let's create something amazing.</p>
+                
+                <div class="contact-stats">
+                    <div class="stat-item">
+                        <span class="stat-number">100+</span>
+                        <span class="stat-label" data-translate="projectsCompleted">Projects Completed</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-number">24/7</span>
+                        <span class="stat-label" data-translate="support">Support</span>
+                    </div>
+                </div>
+
+                <div class="contact-links">
+                    <a href="mailto:info@electic.dev" class="contact-link">
+                        <i class="fas fa-envelope"></i>
+                        <div class="link-content">
+                            <span class="link-title">Email</span>
+                            <span class="link-value">info@electic.dev</span>
+                        </div>
+                    </a>
+                    <a href="https://discord.gg/yourserver" class="contact-link">
+                        <i class="fab fa-discord"></i>
+                        <div class="link-content">
+                            <span class="link-title">Discord</span>
+                            <span class="link-value">Join our community</span>
+                        </div>
+                    </a>
+                    <a href="https://github.com/yourusername" class="contact-link">
+                        <i class="fab fa-github"></i>
+                        <div class="link-content">
+                            <span class="link-title">GitHub</span>
+                            <span class="link-value">Check our repositories</span>
+                        </div>
+                    </a>
+                </div>
+            </div>
+
+            <div class="contact-card form-card">
+                <div class="card-glow"></div>
+                <form>
+                    <div class="form-header">
+                        <div class="step-indicator">
+                            <div class="step active">1</div>
+                            <div class="step-line"></div>
+                            <div class="step">2</div>
+                            <div class="step-line"></div>
+                            <div class="step">3</div>
+                        </div>
+                    </div>
+
+                    <div class="form-group floating-label">
+                        <input type="text" id="name" required>
+                        <label for="name" data-translate="name">Name</label>
+                        <div class="input-highlight"></div>
+                    </div>
+
+                    <div class="form-group floating-label">
+                        <input type="email" id="email" required>
+                        <label for="email" data-translate="email">Email</label>
+                        <div class="input-highlight"></div>
+                    </div>
+
+                    <div class="form-group">
+                        <select id="subject" required>
+                            <option value="" disabled selected data-translate="selectSubject">Select Subject</option>
+                            <option value="web">Web Development</option>
+                            <option value="discord">Discord Bot</option>
+                            <option value="fivem">FiveM Script</option>
+                            <option value="other">Other</option>
+                        </select>
+                        <div class="select-arrow"></div>
+                    </div>
+
+                    <div class="form-group floating-label">
+                        <textarea id="message" required></textarea>
+                        <label for="message" data-translate="message">Message</label>
+                        <div class="input-highlight"></div>
+                    </div>
+
+                    <button type="submit" class="submit-btn">
+                        <span data-translate="send">Send Message</span>
+                        <i class="fas fa-paper-plane"></i>
+                    </button>
+                </form>
+            </div>
         </div>
     </section>
 
