@@ -731,7 +731,7 @@ textarea::placeholder {
     box-shadow: none;
 }
 .contact-card:hover {
-    transform: translateY(-15px);
+    
     box-shadow: 0 15px 30px rgba(114, 137, 218, 0.2);
     
 }
