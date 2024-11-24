@@ -648,6 +648,7 @@ textarea::placeholder {
     backdrop-filter: blur(10px);
 }
 
+
 .form-group {
     margin-bottom: 20px;
 }
@@ -728,6 +729,11 @@ textarea::placeholder {
     backdrop-filter: blur(10px);
     border: none;
     box-shadow: none;
+}
+.contact-card:hover {
+    transform: translateY(-15px);
+    box-shadow: 0 15px 30px rgba(114, 137, 218, 0.2);
+    
 }
 
 .card-glow {
