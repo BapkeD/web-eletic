@@ -2,7 +2,7 @@
 <html lang="nl">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
     <title>Electic Developer Portfolio</title>
     <link rel="stylesheet" href="style.css">
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
@@ -53,20 +53,20 @@
                     <i class="fas fa-globe"></i>
                 </div>
                 <div class="project-content">
-                    <h3>Web Development</h3>
-                    <p>Creating modern, responsive websites and web applications with cutting-edge technologies and best practices in mind.</p>
+                    <h3 data-translate="webDevTitle">Web Development</h3>
+                    <p data-translate="webDevDesc">Creating modern, responsive websites and web applications with cutting-edge technologies and best practices in mind.</p>
                     <div class="project-features">
                         <div class="feature">
                             <i class="fas fa-mobile-alt"></i>
-                            <span>Responsive Design</span>
+                            <span data-translate="responsiveDesign">Responsive Design</span>
                         </div>
                         <div class="feature">
                             <i class="fas fa-tachometer-alt"></i>
-                            <span>High Performance</span>
+                            <span data-translate="highPerformance">High Performance</span>
                         </div>
                         <div class="feature">
                             <i class="fas fa-universal-access"></i>
-                            <span>Accessibility</span>
+                            <span data-translate="accessibility">Accessibility</span>
                         </div>
                     </div>
                     <div class="project-tech">
@@ -83,20 +83,20 @@
                     <i class="fab fa-discord"></i>
                 </div>
                 <div class="project-content">
-                    <h3>Discord Bots</h3>
-                    <p>Developing sophisticated Discord bots with advanced features and seamless integration capabilities.</p>
+                    <h3 data-translate="discordBotsTitle">Discord Bots</h3>
+                    <p data-translate="discordBotsDesc">Developing sophisticated Discord bots with advanced features and seamless integration capabilities.</p>
                     <div class="project-features">
                         <div class="feature">
                             <i class="fas fa-robot"></i>
-                            <span>Custom Commands</span>
+                            <span data-translate="customCommands">Custom Commands</span>
                         </div>
                         <div class="feature">
                             <i class="fas fa-database"></i>
-                            <span>Data Management</span>
+                            <span data-translate="dataManagement">Data Management</span>
                         </div>
                         <div class="feature">
                             <i class="fas fa-shield-alt"></i>
-                            <span>Moderation Tools</span>
+                            <span data-translate="moderationTools">Moderation Tools</span>
                         </div>
                     </div>
                     <div class="project-tech">
@@ -370,6 +370,101 @@ class Developer {
                     });
                 }
             });
+        });
+
+        document.addEventListener('DOMContentLoaded', function() {
+            const translations = {
+                en: {
+                    welcome: "Welcome to",
+                    subtitle: "Specialist in Web, Discord & FiveM Development",
+                    viewProjects: "View Projects",
+                    contact: "Contact Me",
+                    projects: "Projects",
+                    fivemScripts: "FiveM Scripts",
+                    fivemScriptsDesc: "Crafting high-performance, feature-rich FiveM scripts and systems for immersive gameplay.",
+                    contactTitle: "Let's Work Together",
+                    contactDesc: "Ready to start your next project? Send me a message and let's create something amazing.",
+                    projectsCompleted: "Projects Completed",
+                    support: "Support",
+                    webDevTitle: "Web Development",
+                    webDevDesc: "Creating modern, responsive websites and web applications with cutting-edge technologies and best practices in mind.",
+                    responsiveDesign: "Responsive Design",
+                    highPerformance: "High Performance",
+                    accessibility: "Accessibility",
+                    
+                    discordBotsTitle: "Discord Bots",
+                    discordBotsDesc: "Developing sophisticated Discord bots with advanced features and seamless integration capabilities.",
+                    customCommands: "Custom Commands",
+                    dataManagement: "Data Management",
+                    moderationTools: "Moderation Tools"
+                },
+                nl: {
+                    welcome: "Welkom bij",
+                    subtitle: "Specialist in Web, Discord & FiveM Ontwikkeling",
+                    viewProjects: "Bekijk Projecten",
+                    contact: "Neem Contact Op",
+                    projects: "Projecten",
+                    fivemScripts: "FiveM Scripts",
+                    fivemScriptsDesc: "Ontwikkeling van hoogwaardige FiveM scripts en systemen voor een meeslepende gameplay ervaring.",
+                    contactTitle: "Laten we Samenwerken",
+                    contactDesc: "Klaar om je volgende project te starten? Stuur me een bericht en laten we iets geweldigs creëren.",
+                    projectsCompleted: "Projecten Voltooid",
+                    support: "Ondersteuning",
+                    webDevTitle: "Web Development",
+                    webDevDesc: "Ontwikkeling van moderne, responsieve websites en webapplicaties met de nieuwste technologieën en best practices.",
+                    responsiveDesign: "Responsief Ontwerp",
+                    highPerformance: "Hoge Prestaties",
+                    accessibility: "Toegankelijkheid",
+                    
+                    discordBotsTitle: "Discord Bots",
+                    discordBotsDesc: "Ontwikkeling van geavanceerde Discord bots met uitgebreide functionaliteiten en naadloze integratiemogelijkheden.",
+                    customCommands: "Aangepaste Commando's",
+                    dataManagement: "Gegevensbeheer",
+                    moderationTools: "Moderatie Tools"
+                }
+            };
+
+            const langButtons = document.querySelectorAll('.lang-btn');
+            
+            function updateContent(lang) {
+                document.querySelectorAll('[data-translate]').forEach(element => {
+                    const key = element.dataset.translate;
+                    if (translations[lang][key]) {
+                        // Voeg fade-out effect toe
+                        element.style.opacity = '0';
+                        element.style.transform = 'translateY(10px)';
+                        
+                        setTimeout(() => {
+                            element.textContent = translations[lang][key];
+                            // Fade-in effect
+                            element.style.opacity = '1';
+                            element.style.transform = 'translateY(0)';
+                        }, 300);
+                    }
+                });
+
+                // Update active state van buttons
+                langButtons.forEach(btn => {
+                    btn.classList.toggle('active', btn.dataset.lang === lang);
+                });
+
+                // Sla de taalvoorkeur op in localStorage
+                localStorage.setItem('preferredLanguage', lang);
+            }
+
+            // Event listeners voor taal buttons
+            langButtons.forEach(btn => {
+                btn.addEventListener('click', function() {
+                    const lang = this.dataset.lang;
+                    updateContent(lang);
+                });
+            });
+
+            // Check voor opgeslagen taalvoorkeur
+            const savedLanguage = localStorage.getItem('preferredLanguage');
+            if (savedLanguage) {
+                updateContent(savedLanguage);
+            }
         });
     </script>
 </body>

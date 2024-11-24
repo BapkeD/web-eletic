@@ -139,18 +139,15 @@ section {
     border-radius: 10px;
     padding: 25px;
     padding-top: 35px;
-    text-align: left;
     font-family: 'Consolas', monospace;
     font-size: 14px;
     line-height: 1.6;
-    white-space: pre;
     position: relative;
     box-shadow: 0 0 30px rgba(114, 137, 218, 0.1);
     border: 1px solid rgba(114, 137, 218, 0.1);
-    transform: rotate(-3deg) translateY(-10px);
-    transition: transform 0.3s ease;
-    transform-style: preserve-3d;
-    perspective: 1000px;
+    overflow-x: hidden;
+    white-space: pre-wrap;
+    word-break: break-word;
 }
 
 .code-block::before {
@@ -1089,26 +1086,57 @@ body::after {
     /* Hero Section */
     .hero {
         flex-direction: column;
-        text-align: center;
+        padding: 20px 15px;
         gap: 30px;
+        margin-top: 40px; /* Extra ruimte voor language switch */
+    }
+
+    .hero-content {
+        text-align: center;
+        padding: 0;
     }
 
     .hero h1 {
-        font-size: 2.5rem;
+        font-size: 2.2rem;
+        line-height: 1.2;
+        margin-bottom: 15px;
     }
 
     .subtitle {
-        font-size: 1.2rem;
+        font-size: 1rem;
+        line-height: 1.4;
+        margin-bottom: 25px;
     }
 
     .hero-buttons {
-        justify-content: center;
+        flex-direction: column;
+        gap: 12px;
+        width: 100%;
+        max-width: 300px; /* Maximale breedte voor buttons */
+        margin: 0 auto;
     }
 
+    .cta-button {
+        width: 100%;
+        padding: 14px 20px;
+        font-size: 1rem;
+        text-align: center;
+    }
+
+    /* Code block aanpassingen */
     .code-block {
         transform: none;
+        width: 100%;
         max-width: 100%;
         font-size: 12px;
+        padding: 15px;
+        margin-top: 20px;
+    }
+
+    .code-line {
+        font-size: 11px;
+        line-height: 1.4;
+        padding-left: 10px;
     }
 
     /* Projects & Skills */
@@ -1464,4 +1492,323 @@ section {
 }
 
 /* Verwijder eventuele bestaande AOS attributen van de h2 in de HTML */
+
+/* Voeg deze styles toe aan het einde van je bestaande CSS */
+[data-translate] {
+    transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+.lang-btn {
+    background: none;
+    border: 2px solid var(--accent-color);
+    color: var(--text-color);
+    padding: 8px 12px;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-weight: 600;
+    position: relative;
+    overflow: hidden;
+}
+
+.lang-btn::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: var(--gradient);
+    transition: left 0.3s ease;
+    z-index: -1;
+}
+
+.lang-btn:hover::before {
+    left: 0;
+}
+
+.lang-btn.active {
+    background: var(--gradient);
+    border: none;
+    color: white;
+}
+
+.lang-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(114, 137, 218, 0.2);
+}
+
+/* Verbeterde responsive styling */
+@media (max-width: 768px) {
+    /* Project Grid */
+    .project-grid {
+        grid-template-columns: 1fr;
+        gap: 20px;
+        padding: 10px;
+    }
+
+    /* Project Cards */
+    .project-card {
+        padding: 20px;
+    }
+
+    .project-icon {
+        aspect-ratio: 16/9;
+        padding: 20px;
+    }
+
+    .project-icon i {
+        font-size: 2.5rem;
+    }
+
+    .project-content {
+        padding: 20px;
+    }
+
+    .project-content h3 {
+        font-size: 1.5rem;
+        margin-bottom: 10px;
+    }
+
+    .project-content p {
+        font-size: 0.9rem;
+        line-height: 1.4;
+    }
+
+    /* Features */
+    .project-features {
+        gap: 10px;
+        flex-wrap: wrap;
+    }
+
+    .feature {
+        font-size: 0.85rem;
+        padding: 8px;
+    }
+
+    /* Tech Tags */
+    .project-tech {
+        gap: 8px;
+    }
+
+    .tech-tag {
+        font-size: 0.75rem;
+        padding: 4px 8px;
+    }
+
+    /* Hero Section */
+    .hero {
+        padding: 20px 10px;
+    }
+
+    .hero h1 {
+        font-size: 2rem;
+        line-height: 1.2;
+    }
+
+    .subtitle {
+        font-size: 1rem;
+        line-height: 1.4;
+    }
+
+    .hero-buttons {
+        flex-direction: column;
+        gap: 15px;
+    }
+
+    .cta-button {
+        width: 100%;
+        padding: 12px 20px;
+        font-size: 1rem;
+    }
+}
+
+/* Extra kleine apparaten (onder 480px) */
+@media (max-width: 480px) {
+    section {
+        padding: 60px 15px;
+    }
+
+    .project-card {
+        padding: 15px;
+    }
+
+    .project-icon {
+        padding: 15px;
+    }
+
+    .project-icon i {
+        font-size: 2rem;
+    }
+
+    .project-content {
+        padding: 15px;
+    }
+
+    .project-content h3 {
+        font-size: 1.3rem;
+    }
+
+    .project-content p {
+        font-size: 0.85rem;
+    }
+
+    /* Language Switch aanpassingen */
+    .language-switch {
+        top: 10px;
+        right: 10px;
+    }
+
+    .lang-btn {
+        padding: 6px 10px;
+        font-size: 0.8rem;
+    }
+}
+
+/* Zeer kleine apparaten (onder 360px) */
+@media (max-width: 360px) {
+    .hero h1 {
+        font-size: 1.75rem;
+    }
+
+    .subtitle {
+        font-size: 0.9rem;
+    }
+
+    .project-content h3 {
+        font-size: 1.2rem;
+    }
+
+    .project-features {
+        gap: 8px;
+    }
+
+    .feature {
+        font-size: 0.8rem;
+        padding: 6px;
+    }
+
+    .tech-tag {
+        font-size: 0.7rem;
+        padding: 3px 6px;
+    }
+
+    /* Verbeterde button spacing */
+    .hero-buttons {
+        gap: 10px;
+    }
+
+    .cta-button {
+        padding: 10px 15px;
+        font-size: 0.9rem;
+    }
+}
+
+/* Fix voor iOS notch */
+@supports (padding-top: env(safe-area-inset-top)) {
+    .language-switch {
+        padding-top: env(safe-area-inset-top);
+        top: env(safe-area-inset-top);
+    }
+}
+
+/* Verbeterde touch targets voor mobiel */
+@media (hover: none) {
+    .cta-button,
+    .lang-btn,
+    .feature,
+    .tech-tag {
+        min-height: 44px; /* Apple's aanbevolen minimum touch target size */
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+}
+
+/* Verbeterde scrolling op mobiel */
+@media (max-width: 768px) {
+    html, body {
+        overflow-x: hidden;
+    }
+
+    body {
+        position: relative;
+    }
+
+    .project-grid {
+        margin: 20px auto;
+    }
+}
+
+/* Code block basis styling */
+.code-block {
+    flex: 1;
+    max-width: 450px;
+    background-color: #1e1e1e;
+    border-radius: 10px;
+    padding: 25px;
+    padding-top: 35px;
+    font-family: 'Consolas', monospace;
+    font-size: 14px;
+    line-height: 1.6;
+    position: relative;
+    box-shadow: 0 0 30px rgba(114, 137, 218, 0.1);
+    border: 1px solid rgba(114, 137, 218, 0.1);
+    overflow-x: hidden;
+    white-space: pre-wrap;
+    word-break: break-word;
+}
+
+/* Mobiele aanpassingen voor code block */
+@media (max-width: 768px) {
+    .code-block {
+        width: 100%;
+        max-width: 100%;
+        font-size: 12px;
+        padding: 15px;
+        padding-top: 30px;
+        margin: 20px 0;
+        transform: none !important;
+        white-space: pre-wrap;
+    }
+
+    .code-line {
+        font-size: 11px;
+        line-height: 1.4;
+        padding-left: 8px;
+        white-space: pre-wrap;
+        word-break: break-word;
+    }
+    
+    /* Zorg dat lange strings wrappen */
+    .code-string,
+    .code-comment,
+    .code-keyword,
+    .code-function {
+        white-space: pre-wrap;
+        word-break: break-word;
+    }
+}
+
+/* Extra kleine schermen */
+@media (max-width: 480px) {
+    .code-block {
+        font-size: 11px;
+        padding: 12px;
+        padding-top: 25px;
+    }
+
+    .code-line {
+        font-size: 10px;
+        margin: 4px 0;
+    }
+}
+
+/* Zeer kleine schermen */
+@media (max-width: 360px) {
+    .code-block {
+        font-size: 10px;
+        padding: 10px;
+    }
+}
 
