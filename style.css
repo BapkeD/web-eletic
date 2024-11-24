@@ -149,6 +149,8 @@ section {
     border: 1px solid rgba(114, 137, 218, 0.1);
     transform: rotate(-3deg) translateY(-10px);
     transition: transform 0.3s ease;
+    transform-style: preserve-3d;
+    perspective: 1000px;
 }
 
 .code-block::before {
@@ -204,8 +206,12 @@ section {
 }
 
 .project-card {
+    transform-style: preserve-3d;
+    perspective: 1000px;
+    transition: all 0.3s ease;
     background: rgba(26, 26, 26, 0.8);
     border: 1px solid rgba(114, 137, 218, 0.1);
+    transform: translateZ(0);
     border-radius: 20px;
     overflow: hidden;
     height: 100%;
@@ -292,8 +298,8 @@ section {
 }
 
 .tech-tag:hover {
+    transform: translateY(-3px);
     background: var(--gradient);
-    transform: translateY(-2px);
 }
 
 /* Responsive Design */
@@ -303,102 +309,9 @@ section {
     }
 }
 
-.skills-container {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-    gap: 30px;
-    margin-top: 50px;
-    padding: 20px;
-}
 
-.skill-card {
-    background: rgba(26, 26, 26, 0.8);
-    border: 1px solid rgba(114, 137, 218, 0.1);
-    border-radius: 20px;
-    padding: 30px;
-    position: relative;
-    overflow: hidden;
-    backdrop-filter: blur(10px);
-    transition: all 0.3s ease;
-}
 
-.skill-card:hover {
-    transform: translateY(-5px);
-    border-color: rgba(114, 137, 218, 0.3);
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
-}
 
-.skill-header {
-    display: flex;
-    align-items: center;
-    gap: 15px;
-    margin-bottom: 30px;
-}
-
-.skill-icon {
-    font-size: 2rem;
-    background: var(--gradient);
-    -webkit-background-clip: text;
-    background-clip: text;
-    color: transparent;
-}
-
-.skill-header h3 {
-    font-size: 1.8rem;
-    background: var(--gradient);
-    -webkit-background-clip: text;
-    background-clip: text;
-    color: transparent;
-    margin: 0;
-}
-
-.skill-content {
-    display: flex;
-    flex-direction: column;
-    gap: 20px;
-}
-
-.skill-item {
-    width: 100%;
-}
-
-.skill-info {
-    display: flex;
-    justify-content: space-between;
-    margin-bottom: 8px;
-    color: #fff;
-    font-size: 0.9rem;
-}
-
-.percentage {
-    color: var(--accent-color);
-    font-weight: bold;
-}
-
-.progress-bar {
-    width: 100%;
-    height: 6px;
-    background: rgba(255, 255, 255, 0.1);
-    border-radius: 3px;
-    overflow: hidden;
-}
-
-.progress {
-    height: 100%;
-    background: var(--gradient);
-    border-radius: 3px;
-    transition: width 1.5s ease-in-out;
-    animation: progressAnimation 1.5s ease-in-out;
-}
-
-.skill-badges {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 10px;
-    margin-top: 25px;
-    padding-top: 20px;
-    border-top: 1px solid rgba(255, 255, 255, 0.1);
-}
 
 .badge {
     padding: 6px 12px;
@@ -1453,4 +1366,102 @@ body::after {
         justify-content: center;
     }
 }
-  
+
+/* Centreer de projecten sectie */
+#projecten {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.project-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 30px;
+    margin: 50px auto;
+    padding: 20px;
+    max-width: 1400px;
+    width: 100%;
+}
+
+/* Verbeterd hover effect voor project cards */
+.project-card {
+    transform: translateY(0);
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    background: rgba(26, 26, 26, 0.8);
+}
+
+.project-card:hover {
+    transform: translateY(-15px);
+    box-shadow: 0 15px 30px rgba(114, 137, 218, 0.2);
+}
+
+/* Smooth scroll voor hele website */
+html {
+    scroll-behavior: smooth;
+}
+
+/* Verbeterde scroll padding voor smooth anchor links */
+section {
+    scroll-margin-top: 100px;
+}
+
+/* Hover effect voor project icons */
+.project-icon {
+    transition: transform 0.3s ease, background 0.3s ease;
+}
+
+.project-card:hover  {
+    transform: scale(1.1);
+}
+
+/* Hover effect voor tech tags */
+.tech-tag {
+    transition: all 0.3s ease;
+}
+
+.tech-tag:hover {
+    transform: translateY(-3px);
+    background: var(--gradient);
+}
+
+/* Responsive aanpassingen */
+@media (max-width: 1024px) {
+    .project-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 768px) {
+    .project-grid {
+        grid-template-columns: 1fr;
+        max-width: 500px;
+    }
+}
+
+/* Uniforme section header styling */
+.section-header {
+    text-align: center;
+    margin-bottom: 60px;
+}
+
+/* Update de Projects sectie */
+#projecten h2 {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+/* Gradient lijn onder de titel */
+#projecten h2::after {
+    content: '';
+    display: block;
+    width: 100px;
+    height: 4px;
+    background: var(--gradient);
+    margin: 20px auto;
+    border-radius: 2px;
+}
+
+/* Verwijder eventuele bestaande AOS attributen van de h2 in de HTML */
+
