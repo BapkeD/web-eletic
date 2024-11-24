@@ -134,45 +134,90 @@ section {
 
 .code-block {
     flex: 1;
-    max-width: 450px;
+    max-width: 400px;
     background-color: #1e1e1e;
     border-radius: 10px;
-    padding: 25px;
-    padding-top: 35px;
+    padding: 15px;
+    padding-top: 25px;
     font-family: 'Consolas', monospace;
-    font-size: 14px;
-    line-height: 1.6;
+    font-size: 13px;
+    line-height: 1.2;
     position: relative;
     box-shadow: 0 0 30px rgba(114, 137, 218, 0.1);
     border: 1px solid rgba(114, 137, 218, 0.1);
-    overflow-x: hidden;
-    white-space: pre-wrap;
-    word-break: break-word;
+    transform: rotate(-5deg);
 }
 
-.code-block::before {
-    content: '• • •';
-    position: absolute;
-    top: 15px;
-    left: 15px;
-    color: #666;
-    letter-spacing: 6px;
-    font-size: 16px;
+.code-line {
+    white-space: pre;
+    margin: 0;
+    position: relative;
+    padding-left: 0;
 }
 
-.code-block::after {
+.code-line.current::after {
     content: '';
     position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: inherit;
-    border-radius: inherit;
-    z-index: -1;
-    transform: rotate(1deg) scale(0.98);
-    opacity: 0.3;
-    filter: blur(10px);
+    left: calc(0.5em * var(--cursor-position, 0));
+    top: 1px;
+    width: 2px;
+    height: 1em;
+    background-color: #fff;
+    animation: blink 1s step-end infinite;
+    opacity: 0;
+    animation: fadeInBlink 0.3s steps(1) forwards;
+}
+
+@keyframes fadeInBlink {
+    0% { opacity: 0; }
+    100% { 
+        opacity: 1;
+        animation: blink 1s step-end infinite;
+    }
+}
+
+@keyframes blink {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0; }
+}
+
+/* Fade-in effect voor nieuwe regels */
+.code-line.fade-in::after {
+    animation: fadeInBlink 0.3s steps(1) forwards;
+}
+
+/* Zorg voor vloeiendere animaties */
+.code-line {
+    transition: all 0.1s ease-out;
+}
+
+.code-comment {
+    color: #6a9955;
+}
+
+.code-keyword {
+    color: #569cd6;
+    font-weight: bold;
+}
+
+.code-string {
+    color: #ce9178;
+}
+
+.code-function {
+    color: #4ec9b0;
+}
+
+.code-line {
+    padding-left: 0;
+}
+
+.code-line[data-indent="1"] {
+    padding-left: 1em;
+}
+
+.code-line[data-indent="2"] {
+    padding-left: 2em;
 }
 
 /* Responsive design */
@@ -388,6 +433,12 @@ button:hover {
     }
 }
 
+.code-block:hover {
+    transform: rotate(-2deg) translateY(-5px);
+    box-shadow: 0 15px 40px rgba(114, 137, 218, 0.2);
+    border-color: rgba(114, 137, 218, 0.3);
+}
+
 .code-block::before {
     content: '• • •';
     position: absolute;
@@ -421,15 +472,16 @@ button:hover {
 
 .language-switch {
     position: fixed;
-    top: 20px;
-    right: 20px;
+    top: 25px;
+    right: 35px;
     display: flex;
     gap: 10px;
     z-index: 1000;
-    background-color: rgba(26, 26, 26, 0.9);
+    background-color: rgba(26, 26, 26, 0);
     backdrop-filter: blur(10px);
     padding: 8px;
     border-radius: 8px;
+    margin: 20px;
 }
 
 .lang-btn {
@@ -1162,8 +1214,10 @@ body::after {
 
     /* Language Switch */
     .language-switch {
-        top: 10px;
-        right: 10px;
+        top: 20px;
+        right: 25px;
+        padding: 6px;
+        margin: 15px;
     }
 
     .lang-btn {
@@ -1743,14 +1797,14 @@ section {
 /* Code block basis styling */
 .code-block {
     flex: 1;
-    max-width: 450px;
+    max-width: 400px;
     background-color: #1e1e1e;
     border-radius: 10px;
-    padding: 25px;
-    padding-top: 35px;
+    padding: 15px;
+    padding-top: 25px;
     font-family: 'Consolas', monospace;
-    font-size: 14px;
-    line-height: 1.6;
+    font-size: 13px;
+    line-height: 1.2;
     position: relative;
     box-shadow: 0 0 30px rgba(114, 137, 218, 0.1);
     border: 1px solid rgba(114, 137, 218, 0.1);
@@ -1809,6 +1863,125 @@ section {
     .code-block {
         font-size: 10px;
         padding: 10px;
+    }
+}
+
+/* Cursor alleen tonen tijdens typen */
+.code-line.typing::after {
+    content: '';
+    position: absolute;
+    left: calc(0.5em * (var(--cursor-position, 0) + 1));
+    top: 1px;
+    width: 2px;
+    height: 1em;
+    background-color: #fff;
+    animation: blink 1s step-end infinite;
+}
+
+@keyframes blink {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0; }
+}
+
+/* Verwijder cursor met fade-out wanneer typing klaar is */
+.typing-complete .code-line.typing::after {
+    animation: fadeOut 0.3s forwards;
+}
+
+@keyframes fadeOut {
+    from { opacity: 1; }
+    to { opacity: 0; }
+}
+
+.device-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.95);
+    backdrop-filter: blur(10px);
+    z-index: 9999;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+    opacity: 1;
+    transition: opacity 0.3s ease;
+}
+
+/* Verberg op grote schermen */
+@media (min-width: 769px) {
+    .device-overlay {
+        display: none;
+    }
+}
+
+.device-message {
+    background: #1e1e1e;
+    padding: 40px;
+    border-radius: 15px;
+    text-align: center;
+    max-width: 90%;
+    border: 1px solid rgba(114, 137, 218, 0.2);
+    animation: messageSlideIn 0.5s ease-out;
+    display: flex;
+    flex-direction: column;
+    gap: 25px;
+}
+
+.device-message i {
+    font-size: 3.5rem;
+    color: #7289da;
+    margin-bottom: 5px;
+}
+
+.device-message h2 {
+    font-size: 1.8rem;
+    font-weight: 600;
+    background: var(--gradient);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    line-height: 1.3;
+}
+
+.device-message p {
+    color: #a0a0a0;
+    font-size: 1.1rem;
+    line-height: 1.5;
+    margin: 10px 0 15px 0;
+    padding: 0 20px;
+}
+
+.continue-btn {
+    background: var(--gradient);
+    border: none;
+    padding: 14px 30px;
+    border-radius: 8px;
+    color: white;
+    font-size: 1.1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    margin-top: 10px;
+    align-self: center;
+    min-width: 200px;
+}
+
+.continue-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(114, 137, 218, 0.2);
+}
+
+@keyframes messageSlideIn {
+    from {
+        opacity: 0;
+        transform: translateY(-50px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
     }
 }
 

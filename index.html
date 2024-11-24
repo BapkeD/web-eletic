@@ -9,7 +9,15 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 </head>
 <body>
-    
+    <div class="device-overlay">
+        <div class="device-message">
+            <i class="fas fa-desktop"></i>
+            <h2 data-translate="betterExperience">Better Experience on Desktop</h2>
+            <p data-translate="betterExperienceDesc">This portfolio is best viewed on a larger screen for the full experience.</p>
+            <button class="continue-btn" data-translate="continueAnyway">Continue Anyway</button>
+        </div>
+    </div>
+
     <div class="language-switch">
         <button class="lang-btn active" data-lang="en">EN</button>
         <button class="lang-btn" data-lang="nl">NL</button>
@@ -277,50 +285,93 @@
 
             // Nieuwe typing implementatie
             const codeBlock = document.querySelector('.code-block');
-            const codeText = `// Initialiseer Developer
-class Developer {
-    name: "Electic",
-    specialties: [
-        "Web Development",
-        "Discord Bots",
-        "FiveM Scripts"
-    ],
-    status: "Available for projects",
-    passion: "Creating amazing digital experiences"
-}
-// Let's build something awesome together!`;
+            
+            // Definieer de code structuur
+            const codeStructure = [
+                { type: 'comment', text: '// Initialiseer Developer' },
+                { type: 'code', text: 'class Developer {' },
+                { type: 'property', text: '  name: "Electic",' },
+                { type: 'property', text: '  specialties: [' },
+                { type: 'string', text: '    "Web Development",' },
+                { type: 'string', text: '    "Discord Bots",' },
+                { type: 'string', text: '    "FiveM Scripts"' },
+                { type: 'code', text: '  ],' },
+                { type: 'property', text: '  status: "Available for projects",' },
+                { type: 'property', text: '  passion: "Creating amazing digital experiences"' },
+                { type: 'code', text: '}' },
+                { type: 'comment', text: '// Let\'s build something awesome together!' }
+            ];
 
-            codeBlock.innerHTML = '';
-            let currentText = '';
-            let currentIndex = 0;
+            let currentLineIndex = 0;
+            let currentCharIndex = 0;
+            let currentLine = '';
+            let isFirstRender = true; // Voor fade-in effect
 
-            const cursor = document.createElement('span');
-            cursor.className = 'typing-cursor';
-
-            function typeNextCharacter() {
-                if (currentIndex < codeText.length) {
-                    const char = codeText[currentIndex];
-                    currentText += char;
-                    codeBlock.innerHTML = formatCode(currentText);
-                    codeBlock.appendChild(cursor);
-                    currentIndex++;
-                    
-                    // Snellere typing met kleine random variatie
-                    const randomDelay = Math.floor(Math.random() * (40 - 20 + 1)) + 20;
-                    setTimeout(typeNextCharacter, randomDelay);
-                } else {
-                    codeBlock.classList.add('typing-complete');
+            function formatLine(line, type) {
+                switch(type) {
+                    case 'comment':
+                        return `<span class="code-comment">${line}</span>`;
+                    case 'string':
+                        return line.replace(/"([^"]+)"/g, '<span class="code-string">"$1"</span>');
+                    case 'property':
+                        return line.replace(/"([^"]+)"/g, '<span class="code-string">"$1"</span>');
+                    case 'code':
+                        return line
+                            .replace(/\b(class)\b/g, '<span class="code-keyword">class</span>')
+                            .replace(/\b(Developer)\b/g, '<span class="code-function">Developer</span>');
+                    default:
+                        return line;
                 }
             }
 
-            function formatCode(text) {
-                return text
-                    .replace(/class/g, '<span class="code-keyword">class</span>')
-                    .replace(/Developer/g, '<span class="code-function">Developer</span>')
-                    .replace(/"[^"]+"/g, match => `<span class="code-string">${match}</span>`)
-                    .replace(/\/\/ .*$/gm, match => `<span class="code-comment">${match}</span>`);
+            function renderCode() {
+                const lines = [];
+                for (let i = 0; i < currentLineIndex; i++) {
+                    const indent = getIndentLevel(codeStructure[i].text);
+                    lines.push(`<div class="code-line" data-indent="${indent}">${formatLine(codeStructure[i].text, codeStructure[i].type)}</div>`);
+                }
+                
+                // Voeg cursor alleen toe tijdens het typen
+                if (currentLineIndex < codeStructure.length) {
+                    const indent = getIndentLevel(codeStructure[currentLineIndex].text);
+                    const cursorPos = currentLine.length + indent * 2;
+                    lines.push(`<div class="code-line typing" data-indent="${indent}" style="--cursor-position: ${cursorPos}">${formatLine(currentLine, codeStructure[currentLineIndex].type)}</div>`);
+                }
+                
+                codeBlock.innerHTML = lines.join('');
             }
 
+            function getIndentLevel(line) {
+                const spaces = line.match(/^\s*/)[0].length;
+                return Math.floor(spaces / 2);
+            }
+
+            function typeNextCharacter() {
+                if (currentLineIndex >= codeStructure.length) {
+                    codeBlock.classList.add('typing-complete');
+                    // Verwijder de cursor na het typen
+                    document.querySelector('.typing')?.classList.remove('typing');
+                    return;
+                }
+
+                if (currentCharIndex >= codeStructure[currentLineIndex].text.length) {
+                    currentLineIndex++;
+                    currentCharIndex = 0;
+                    currentLine = '';
+                    typeNextCharacter();
+                    return;
+                }
+
+                currentLine += codeStructure[currentLineIndex].text[currentCharIndex];
+                currentCharIndex++;
+                
+                renderCode();
+
+                const randomDelay = Math.floor(Math.random() * (25 - 10 + 1)) + 10;
+                setTimeout(typeNextCharacter, randomDelay);
+            }
+
+            // Start het typing effect
             typeNextCharacter();
         });
 
@@ -396,7 +447,10 @@ class Developer {
                     discordBotsDesc: "Developing sophisticated Discord bots with advanced features and seamless integration capabilities.",
                     customCommands: "Custom Commands",
                     dataManagement: "Data Management",
-                    moderationTools: "Moderation Tools"
+                    moderationTools: "Moderation Tools",
+                    betterExperience: "Better Experience on Desktop",
+                    betterExperienceDesc: "This portfolio is best viewed on a larger screen for the full experience.",
+                    continueAnyway: "Continue Anyway"
                 },
                 nl: {
                     welcome: "Welkom bij",
@@ -420,7 +474,10 @@ class Developer {
                     discordBotsDesc: "Ontwikkeling van geavanceerde Discord bots met uitgebreide functionaliteiten en naadloze integratiemogelijkheden.",
                     customCommands: "Aangepaste Commando's",
                     dataManagement: "Gegevensbeheer",
-                    moderationTools: "Moderatie Tools"
+                    moderationTools: "Moderatie Tools",
+                    betterExperience: "Betere Ervaring op Desktop",
+                    betterExperienceDesc: "Dit portfolio wordt het beste weergegeven op een groter scherm voor de volledige ervaring.",
+                    continueAnyway: "Toch Doorgaan"
                 }
             };
 
@@ -464,6 +521,26 @@ class Developer {
             const savedLanguage = localStorage.getItem('preferredLanguage');
             if (savedLanguage) {
                 updateContent(savedLanguage);
+            }
+
+            const overlay = document.querySelector('.device-overlay');
+            const continueBtn = document.querySelector('.continue-btn');
+
+            if (continueBtn) {
+                continueBtn.addEventListener('click', function() {
+                    overlay.style.opacity = '0';
+                    setTimeout(() => {
+                        overlay.style.display = 'none';
+                    }, 300);
+                    
+                    // Sla de keuze op in localStorage
+                    localStorage.setItem('deviceOverlaySeen', 'true');
+                });
+            }
+
+            // Check of de overlay al eerder is gezien
+            if (localStorage.getItem('deviceOverlaySeen')) {
+                overlay.style.display = 'none';
             }
         });
     </script>
